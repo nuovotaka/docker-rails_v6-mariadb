@@ -1,0 +1,23 @@
+version: '2'
+services:
+  db:
+    image: mariadb:latest
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data/db:/var/lib/mysql
+    env_file: ./docker/mysql/password.env
+  web:
+    build:
+      context: .
+      dockerfile: ./docker/rails/Dockerfile
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/myapp
+    environment:
+      RAILS_ENV: development
+    env_file: ./docker/mysql/password.env
+    depends_on:
+      - db
