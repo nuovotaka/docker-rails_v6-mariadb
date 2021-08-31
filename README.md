@@ -4,11 +4,15 @@ Docker for Mac で Ruby on Rails アプリの開発環境
 workディレクトリ(なんでも構いません)を作成して
 ```
 mkdir work
+```
+```
 cd work
 ```
 githubからクローンしてくる
 ```
 git clone https://github.com/nuovotaka/docker-rails_v6-mariadb.git
+```
+```
 cd docker-rails_v6-mariadb
 ```
 
@@ -51,6 +55,8 @@ default: &default
 最初はWebpackのインストールとデータベースを作成する（次回からは必要ない）
 ```
 docker-compose run --rm web bundle exec rails webpacker:install
+```
+```
 docker-compose run --rm web rake db:create
 ```
 
@@ -74,10 +80,12 @@ localhost:3000 でRailsのウェルカム画面が表示されるのがわかる
 別タブで以下のコマンドを実行する
 ```
 docker-compose run web rails g scaffold Memo title:string body:text
+```
+```
 docker-compose run --rm web rake db:migrate
 ```
 
-基本的にRailsコマンドの最初に「docker-compose run web」をつけてやればコンテナ上で実行され、Mac側にも反映されます。
+基本的にコマンドの最初に「docker-compose run web」をつけてやればコンテナ上で実行され、Mac側にも反映されます。
 
 ### アプリの確認
 
